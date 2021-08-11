@@ -20,4 +20,12 @@ Steps :
                 			<artifactId>spring-security-test</artifactId>
                 			<scope>test</scope>
                 </dependency>
+      
+   * 2. Create an "/authenticate" api endpoint that will
+                
+                
+                - accept user id and password 
+                - return a jwt as a reponse
+                
+                 
      

@@ -1,6 +1,5 @@
 package com.aamer.springsecurity.jwt.util;
 
-
 /*
 Util class for
     1. generating the jwt token based on Userdetails that is passed
@@ -16,6 +15,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -30,7 +30,7 @@ public class JwtUtil {
     public String generateToken(UserDetails userDetails) {
         Map<String,Object> claims = new HashMap<>();
         String username = userDetails.getUsername();
-        createToken(claims,username);
+        return createToken(claims,username);
     }
 
     // create a new jwt token
@@ -39,7 +39,7 @@ public class JwtUtil {
                 .setClaims(claims)
                 .setSubject(username)
                 .setIssuedAt(new Date())
-                .setExpiration(new java.sql.Date().toLocalDate().plusWeeks(2))
+                .setExpiration(java.sql.Date.valueOf(LocalDate.now().plusWeeks(2)))
                 .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
                 .compact();
     }
@@ -56,19 +56,23 @@ public class JwtUtil {
         return extractTokenExpiration(token).before(new Date());
     }
 
+    // extract token expiry time from claims
     private Date extractTokenExpiration(String token) {
         return extractClaim(token, Claims::getExpiration);
     }
 
+    // extract username from claims
     private String extractUsername(String token) {
         return extractClaim(token,Claims::getSubject);
     }
 
+    // extract claims
     private <T>T extractClaim(String token, Function<Claims,T> claimsResolver) {
         final Claims claims = extractAllClaims(token);
         return claimsResolver.apply(claims);
     }
 
+    // get the body from token
     private Claims extractAllClaims(String token) {
         return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
     }
