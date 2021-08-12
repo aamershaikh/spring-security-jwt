@@ -35,5 +35,8 @@ Branch : authenticateApiWithJwt
                - validate and set in security context
                
    * 4. configure stateless session creation policy to notify spring security to not manage the sessions , instead we are doing it thru JWT
-                       
+
+
+
+Postman Request : https://www.getpostman.com/collections/6ede24ccd0176ca8a7a7      
    
