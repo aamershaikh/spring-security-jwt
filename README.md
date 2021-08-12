@@ -26,10 +26,14 @@ Steps :
                 
                 - accept user id and password 
                 - return a jwt as a reponse
-                
-   * 3. Intercept all incoming request 
+
+
+Branch : authenticateApiWithJwt                
+   * 3. Intercept all incoming request via a JwtFilter (OncePerRequestFilter)s
                
                - extract JWT from the header
-               - validate and set in execution context
+               - validate and set in security context
+               
+   * 4. configure stateless session creation policy to notify spring security to not manage the sessions , instead we are doing it thru JWT
                        
-     
+   
