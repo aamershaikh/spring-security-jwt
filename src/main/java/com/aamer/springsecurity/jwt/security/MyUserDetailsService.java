@@ -14,6 +14,7 @@ public class MyUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        // in real world applications the user is fetched from the database instead of hardcoding here.
         return new User("test", "test", new ArrayList<>());
     }
 }

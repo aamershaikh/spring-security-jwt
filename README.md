@@ -27,5 +27,9 @@ Steps :
                 - accept user id and password 
                 - return a jwt as a reponse
                 
-                 
+   * 3. Intercept all incoming request 
+               
+               - extract JWT from the header
+               - validate and set in execution context
+                       
      

@@ -24,7 +24,7 @@ public class HelloController {
     @Autowired
     private JwtUtil jwtUtil;
 
-    @RequestMapping(value = "/api/hello")
+    @RequestMapping(value = "/hello")
     public String getMessage(){
         return "Hello JWT!";
     }
